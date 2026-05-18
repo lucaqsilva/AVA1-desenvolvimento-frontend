@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini Projeto Frontend</title>
+    <title>Frontend + Backend</title>
 
     <style>
         body {
@@ -24,7 +24,7 @@
             text-align: center;
             backdrop-filter: blur(10px);
             box-shadow: 0 0 20px rgba(0,0,0,0.3);
-            width: 350px;
+            width: 400px;
         }
 
         h1 {
@@ -56,42 +56,54 @@
             margin-top: 20px;
             font-size: 18px;
             font-weight: bold;
+            color: #ffffff;
         }
     </style>
 </head>
 <body>
 
     <div class="card">
-        <h1>Projeto Frontend 🚀</h1>
+
+        <h1>Projeto Full Stack 🚀</h1>
 
         <p>
-            Clique no botão para receber uma missão aleatória de programador.
+            Clique no botão para conectar o frontend ao backend.
         </p>
 
-        <button onclick="gerarMissao()">
-            Gerar Missão
+        <button onclick="conectarBackend()">
+            Conectar Backend
         </button>
 
         <div id="mensagem"></div>
+
     </div>
 
     <script>
-        const missoes = [
-            "Criar uma tela responsiva 📱",
-            "Aprender Flexbox hoje 🎯",
-            "Fazer um commit sem quebrar nada 🔥",
-            "Tomar café e programar ☕",
-            "Resolver bug em menos de 10 minutos 😎",
-            "Aprender uma nova função JavaScript ⚡",
-            "Subir projeto no GitHub com sucesso 🚀"
-        ];
 
-        function gerarMissao() {
-            const sorteio = Math.floor(Math.random() * missoes.length);
+        async function conectarBackend() {
 
-            document.getElementById("mensagem").innerText =
-                missoes[sorteio];
+            const mensagem = document.getElementById("mensagem");
+
+            mensagem.innerText = "Conectando ao backend...";
+
+            try {
+
+                const resposta = await fetch("http://IP_DO_SERVIDOR:5000");
+
+                const dados = await resposta.json();
+
+                mensagem.innerText =
+                    dados.mensagem + " | Status: " + dados.status;
+
+            } catch (erro) {
+
+                mensagem.innerText =
+                    "Erro ao conectar com o backend ❌";
+
+                console.error(erro);
+            }
         }
+
     </script>
 
 </body>
