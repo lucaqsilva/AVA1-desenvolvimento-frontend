@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Projeto Frontend</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1e1e2f, #3a3a5f);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            width: 350px;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #ddd;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            background-color: #00c896;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            background-color: #00e0aa;
+        }
+
+        #mensagem {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>Projeto Frontend 🚀</h1>
+
+        <p>
+            Clique no botão para receber uma missão aleatória de programador.
+        </p>
+
+        <button onclick="gerarMissao()">
+            Gerar Missão
+        </button>
+
+        <div id="mensagem"></div>
+    </div>
+
+    <script>
+        const missoes = [
+            "Criar uma tela responsiva 📱",
+            "Aprender Flexbox hoje 🎯",
+            "Fazer um commit sem quebrar nada 🔥",
+            "Tomar café e programar ☕",
+            "Resolver bug em menos de 10 minutos 😎",
+            "Aprender uma nova função JavaScript ⚡",
+            "Subir projeto no GitHub com sucesso 🚀"
+        ];
+
+        function gerarMissao() {
+            const sorteio = Math.floor(Math.random() * missoes.length);
+
+            document.getElementById("mensagem").innerText =
+                missoes[sorteio];
+        }
+    </script>
+
+</body>
+</html>
