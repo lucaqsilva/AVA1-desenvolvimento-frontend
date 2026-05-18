@@ -3,80 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frontend + Backend</title>
+    <title>Painel Full Stack</title>
 
     <style>
-        body {
+
+        * {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #1e1e2f, #3a3a5f);
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #1f2937;
             color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 28px;
+        }
+
+        header p {
+            margin-top: 8px;
+            color: #d1d5db;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
         }
 
         .card {
-            background: rgba(255,255,255,0.1);
-            padding: 40px;
-            border-radius: 15px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 0 20px rgba(0,0,0,0.3);
-            width: 400px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
 
-        h1 {
-            margin-bottom: 10px;
+        .card h2 {
+            margin-bottom: 15px;
+            color: #111827;
         }
 
-        p {
-            color: #ddd;
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+            font-size: 18px;
+        }
+
+        .status-indicator {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background-color: gray;
         }
 
         button {
-            margin-top: 20px;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 8px;
-            background-color: #00c896;
+            background-color: #2563eb;
             color: white;
-            font-size: 16px;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 6px;
             cursor: pointer;
+            font-size: 15px;
             transition: 0.3s;
         }
 
         button:hover {
-            transform: scale(1.05);
-            background-color: #00e0aa;
+            background-color: #1d4ed8;
         }
 
-        #mensagem {
-            margin-top: 20px;
-            font-size: 18px;
-            font-weight: bold;
-            color: #ffffff;
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #777;
+            font-size: 14px;
         }
+
     </style>
 </head>
 <body>
 
-    <div class="card">
-
-        <h1>Projeto Full Stack 🚀</h1>
+    <header>
+        <h1>Painel Frontend Full Stack</h1>
 
         <p>
-            Clique no botão para conectar o frontend ao backend.
+            Integração entre frontend e backend utilizando Node.js e API REST.
         </p>
+    </header>
 
-        <button onclick="conectarBackend()">
-            Conectar Backend
-        </button>
+    <main>
 
-        <div id="mensagem"></div>
+        <div class="card">
 
-    </div>
+            <h2>Status da API</h2>
+
+            <p>
+                Clique no botão abaixo para verificar a comunicação com o backend.
+            </p>
+
+            <br>
+
+            <button onclick="conectarBackend()">
+                Verificar Backend
+            </button>
+
+            <div class="status">
+                <div class="status-indicator" id="indicador"></div>
+
+                <span id="mensagem">
+                    Aguardando verificação...
+                </span>
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h2>Tecnologias Utilizadas</h2>
+
+            <ul>
+                <li>HTML5</li>
+                <li>CSS3</li>
+                <li>JavaScript</li>
+                <li>Node.js</li>
+                <li>Express</li>
+                <li>PM2</li>
+                <li>Git e GitHub</li>
+            </ul>
+
+        </div>
+
+    </main>
+
+    <footer>
+        Projeto acadêmico — Desenvolvimento Full Stack - Lucas Nicoli
+    </footer>
 
     <script>
 
@@ -84,21 +158,30 @@
 
             const mensagem = document.getElementById("mensagem");
 
+            const indicador = document.getElementById("indicador");
+
             mensagem.innerText = "Conectando ao backend...";
+
+            indicador.style.backgroundColor = "orange";
 
             try {
 
-                const resposta = await fetch("http://144.22.173.63:5000");
+                const resposta =
+                    await fetch("http://144.22.173.63:5000");
 
                 const dados = await resposta.json();
 
                 mensagem.innerText =
                     dados.mensagem + " | Status: " + dados.status;
 
+                indicador.style.backgroundColor = "green";
+
             } catch (erro) {
 
                 mensagem.innerText =
-                    "Erro ao conectar com o backend ❌";
+                    "Erro ao conectar com o backend";
+
+                indicador.style.backgroundColor = "red";
 
                 console.error(erro);
             }
